@@ -1,0 +1,173 @@
+{
+  "schema": "hathq://hat/package/v2",
+  "package_id": "hat/hibee-operator",
+  "repository_id": "hat-hibee-operator",
+  "version": "0.10.0",
+  "specification_version": "1.0.0",
+  "manifest": {
+    "schema": "hathq://hat/manifest/v1",
+    "id": "hat/hibee-operator",
+    "name": "Hibee Operator",
+    "version": "0.10.0",
+    "capabilities": [
+      "hibee-capability-review",
+      "local-runtime-diagnosis"
+    ],
+    "decision_boundaries": [
+      "recommend-hibee-operation"
+    ],
+    "input_classifications": [
+      "internal-confidential"
+    ],
+    "output_classification": "internal",
+    "permissions": [
+      {
+        "resource": "hibee-projection",
+        "operations": [
+          "inspect-metadata",
+          "review-evidence",
+          "propose-recommendation"
+        ],
+        "mode": "propose"
+      }
+    ]
+  },
+  "operations": [
+    {
+      "id": "hathq://vocabulary/action/inspect-hibee-local/v1",
+      "input_schema": "hathq://hat-hibee-operator/inspect-hibee-local-input/v1",
+      "output_schema": "hathq://hat-hibee-operator/inspect-hibee-local-output/v1",
+      "context_plan": {
+        "id": "inspect-hibee-local-context",
+        "selectors": [
+          {
+            "namespace": "hibee-projection",
+            "projection_schema": "hathq://hat-hibee-operator/hibee-projection/v1",
+            "required": true
+          }
+        ],
+        "unresolved_policy": "record-unresolved"
+      },
+      "reducer": {
+        "id": "inspect-hibee-local-reducer",
+        "strategy": "typed-domain-event",
+        "event_schema": "hathq://hat-hibee-operator/inspect-hibee-local-event/v1",
+        "projection_schema": "hathq://hat-hibee-operator/inspect-hibee-local-projection/v1",
+        "conflict_policy": "reject"
+      },
+      "procedure": {
+        "id": "inspect-hibee-local-procedure",
+        "steps": [
+          {
+            "action_id": "hathq://vocabulary/action/inspect-hibee-local/v1",
+            "input_schema": "hathq://hat-hibee-operator/inspect-hibee-local-input/v1",
+            "output_schema": "hathq://hat-hibee-operator/inspect-hibee-local-output/v1"
+          }
+        ]
+      },
+      "handler": {
+        "kind": "declarative-hat",
+        "reference": "inspect-hibee-local-procedure"
+      }
+    }
+  ],
+  "catalog": {
+    "schema": "hathq://hat/semantic-catalog/v1",
+    "identity": {
+      "catalog_id": "hat-hibee-operator",
+      "version": 1,
+      "digest_sha256": "aa2525a06328bb36f9c773df8d65472d06c288d2691937fa235978e54bee125f"
+    },
+    "owner_repository_id": "hat-hibee-operator",
+    "foundation": false,
+    "dependencies": [
+      {
+        "catalog_id": "hathq.foundation",
+        "version": 1,
+        "digest_sha256": "6b618dff030e551bafd6b1a70fe6daf71e2873de9c2230f4cf71e9ac9fbf2c0f"
+      }
+    ],
+    "incompatibilities": [],
+    "terms": [
+      {
+        "reference": {
+          "catalog_id": "hat-hibee-operator",
+          "catalog_digest_sha256": "aa2525a06328bb36f9c773df8d65472d06c288d2691937fa235978e54bee125f",
+          "term_id": "hathq://vocabulary/entity/hibee-projection/v1",
+          "version": 1,
+          "definition_digest_sha256": "87155691fa08e44f134bbabd324256b8ffdc58d8ccb09f6df053078d73f53f04",
+          "kind": "entity-type"
+        },
+        "wire_schema": "hathq://hat-hibee-operator/hibee-projection/v1",
+        "semantic_icon": "generic",
+        "dependencies": [],
+        "is_a": [],
+        "domain": [],
+        "range": []
+      },
+      {
+        "reference": {
+          "catalog_id": "hat-hibee-operator",
+          "catalog_digest_sha256": "aa2525a06328bb36f9c773df8d65472d06c288d2691937fa235978e54bee125f",
+          "term_id": "hathq://vocabulary/state/hibee-attention-item/v1",
+          "version": 1,
+          "definition_digest_sha256": "e644365e8bd0cb7727b3a0e623de95240a947b4d301442e06398f9e83af2d096",
+          "kind": "state-type"
+        },
+        "wire_schema": "hathq://hat-hibee-operator/hibee-attention-item/v1",
+        "semantic_icon": "generic",
+        "dependencies": [],
+        "is_a": [],
+        "domain": [],
+        "range": []
+      },
+      {
+        "reference": {
+          "catalog_id": "hat-hibee-operator",
+          "catalog_digest_sha256": "aa2525a06328bb36f9c773df8d65472d06c288d2691937fa235978e54bee125f",
+          "term_id": "hathq://vocabulary/action/inspect-hibee-local/v1",
+          "version": 1,
+          "definition_digest_sha256": "dd706686230fff71f48732f2f13eb29d58becd8c401ddbeb503d17ef682fe9c7",
+          "kind": "action"
+        },
+        "wire_schema": "hathq://hat-hibee-operator/inspect-hibee-local-input/v1",
+        "semantic_icon": "generic",
+        "dependencies": [],
+        "is_a": [],
+        "domain": [],
+        "range": []
+      }
+    ],
+    "lexicalizations": [],
+    "frames": [
+      {
+        "frame_id": "inspect-hibee-local-procedure-frame",
+        "definition_digest_sha256": "23843422ca6ad2c3c417040fb57b97ce027b1f552d73ea8247f22e089a475392",
+        "predicate": {
+          "catalog_id": "hat-hibee-operator",
+          "catalog_digest_sha256": "aa2525a06328bb36f9c773df8d65472d06c288d2691937fa235978e54bee125f",
+          "term_id": "hathq://vocabulary/action/inspect-hibee-local/v1",
+          "version": 1,
+          "definition_digest_sha256": "dd706686230fff71f48732f2f13eb29d58becd8c401ddbeb503d17ef682fe9c7",
+          "kind": "action"
+        },
+        "roles": [
+          {
+            "role": "actor",
+            "required": true,
+            "accepted_kinds": [
+              "entity-type"
+            ]
+          },
+          {
+            "role": "object",
+            "required": true,
+            "accepted_kinds": [
+              "concept"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
